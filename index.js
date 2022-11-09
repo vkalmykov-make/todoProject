@@ -16,10 +16,6 @@ const todoData = new Map([
 //s
 instance.use(express.json());
 
-/* instance.get("/", (req, res) => {
-  res.send(`Hello ${PORT}`);
-}); */
-
 instance.get("/todos", (req, res) => {
   res.status(200).json({
     items: Array.from(todoData.values()),
