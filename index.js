@@ -3,7 +3,7 @@ import { createRanNum } from "./randomNumber.js";
 //const express = require("express");
 import express, { response } from "express";
 //require("dotenv").config();
-//ass
+
 
 const PORT = process.env.PORT || 5003;
 
