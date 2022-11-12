@@ -1,9 +1,13 @@
 import "dotenv/config";
 import { createRanNum } from "./randomNumber.js";
 //const express = require("express");
-import express, { response } from "express";
+import express, { json, response } from "express";
 //require("dotenv").config();
+import mongoose from "mongoose";
 
+/* mongoose.connect('mongodb+srv://kalmikov53:XCDU9j0eTjhrEXWh@cluster0.4dojxrf.mongodb.net/blog?retryWrites=true&w=majority')
+.then(()=> console.log('DB ok'))
+.catch(() => console.log('DB error', err)) */
 
 const PORT = process.env.PORT || 5003;
 
@@ -13,15 +17,17 @@ const todoData = new Map([
   ["1", { name: "jhello ", autor: "some", id: "1", task: "DoImportantThing" }],
   [2, { name: "asd2 ", autor: "some2", id: "2", task: "SomeTask" }],
 ]);
-//s
+
 instance.use(express.json());
 
+//Get all todo
 instance.get("/todos", (req, res) => {
   res.status(200).json({
     items: Array.from(todoData.values()),
   });
 });
 
+//GET a specific todo by ID
 instance.get(`/todos/:id`, (req, res) => {
   const { id } = req.params;
   const todoDataList = todoData.get(id);
@@ -34,7 +40,7 @@ instance.get(`/todos/:id`, (req, res) => {
     };
     return;
   }
- 
+
   res.send(todoDataList);
 });
 
@@ -43,6 +49,10 @@ instance.post(`/todos`, (req, res) => {
   let { autor, task } = req.body; //doesnt work with 'body' parameter
   //let {task}= req.body;
   let randomId = createRanNum().toString();
+  if (!autor || !task)
+    res.json({
+      message: "'Autor' and 'Task' must be provided",
+    });
 
   let obj = { autor: autor, id: randomId, task: task };
   todoData.set(randomId, obj);
@@ -54,6 +64,14 @@ instance.post(`/todos`, (req, res) => {
 instance.put("/todos/:id", (req, res) => {
   const { autor, task } = req.body;
   const { id } = req.params;
+  if (!id)
+    res.json({
+      message: "'ID' must be provided",
+    });
+    else if (todoData.get(id) === false) res.json({
+      message: "'ID' doesnt exist",
+    });
+
   todoData.set(id, { autor: autor, task: task, id: id });
   res.send(todoData.get(id));
 });
