@@ -6,14 +6,13 @@ const TaskSchema = new mongoose.Schema(
       type: String,
       default: "New task",
     },
-    autor: {
-      type: String,
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Author",
       requred: true,
     },
-    id: {
-      type: Number,
-      requred: true,
-    },
+    description: String,
+    id: Number
     //if not requred, i send like String, not like Object. exm:     Id: string
   },
   {
