@@ -1,23 +1,6 @@
-import { MongoStorage } from './mangoDB-storage.js'
-import { MapStorage } from './map-storage.js';
-
-/* export class Storage {
-  getItems() {
-    throw new Error("Not implemented");
-  }
-
-  setItems() {
-    throw new Error("Not implemented");
-  }
-
-  getItemById(id) {
-    throw new Error("Not implemented");
-  }
-
-  isEmpty(value) {
-    return Boolean(value);
-  }
-} */
+import { MongoStorage } from "./db/mangoDB-storage.js";
+import { MapStorage } from "./db/map-storage.js";
+import { postgreSQL } from "./db/postgreSQL-storage.js";
 
 export class StorageProvider {
   static getInstance(type) {
@@ -26,10 +9,10 @@ export class StorageProvider {
         return new MapStorage();
       case "mongo":
         return new MongoStorage();
+      case "postgres":
+        return new postgreSQL();
       default:
         throw new Error("unknown type");
     }
   }
 }
-
-

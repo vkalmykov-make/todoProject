@@ -1,5 +1,5 @@
-import { createRanNum } from "./randomNumber.js";
-import { Storage } from "./types.js";
+import { createRanNum } from "../randomNumber.js";
+import { Storage } from "../storage.js";
 //MAP storage
 export class MapStorage extends Storage {
   constructor() {
@@ -131,7 +131,6 @@ export class MapStorage extends Storage {
             const nameA = a.task.toUpperCase();
             const nameB = b.task.toUpperCase(); 
 
-            // sort in an ascending order
             if (nameA < nameB) {
               return 1;
             }
@@ -139,7 +138,6 @@ export class MapStorage extends Storage {
               return -1;
             }
 
-            // names must be equal
             return 0;
           });
       }

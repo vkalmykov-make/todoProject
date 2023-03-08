@@ -6,7 +6,7 @@ import { StorageProvider } from "./storage-provider.js";
 // })()
 
 //Constants
-const database = StorageProvider.getInstance("map");
+const database = StorageProvider.getInstance("postgres");
 const PORT = process.env.PORT || 5003;
 const instance = express();
 

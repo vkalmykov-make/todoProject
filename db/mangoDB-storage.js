@@ -1,8 +1,8 @@
 import mongoose, { get, set } from "mongoose";
 import "dotenv/config";
-import Task from "./task.js";
-import Author from "./author.js";
-import { Storage } from "./types.js";
+import Task from "../models/mango/taskMango.js";
+import Author from "../models/mango/authorMango.js";
+import { Storage } from "../storage.js";
 
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
